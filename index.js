@@ -2,7 +2,9 @@ const express = require("express");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const cors = require('cors');
+const dotenv = require('dotenv');
 
+dotenv.config();
 const app = express();
 const port = 8000;
 

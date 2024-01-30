@@ -1,10 +1,9 @@
 const pool = require("../db");
 const queries = require("../queries/login");
 const jwt = require("jsonwebtoken");
-const secretKey = "manoj";
 const bcrypt = require('bcrypt');
 const util = require('util');
-// const saltRounds = 10;
+require('dotenv').config();
 
 const compareAsync = util.promisify(bcrypt.compare);
 
@@ -23,7 +22,7 @@ const getAccount = async (req, resp) => {
     const result = await compareAsync(password, storedPassword);
 
     if (result) {
-      const token = jwt.sign({ id }, secretKey, { expiresIn: "1d" });
+      const token = jwt.sign({ id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
       resp.status(200).json(token);
     } else {
       resp.json('Incorrect Password');

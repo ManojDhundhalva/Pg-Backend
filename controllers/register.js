@@ -2,8 +2,9 @@ const pool = require("../db");
 const queries = require("../queries/register");
 const bcrypt = require('bcrypt');
 const util = require('util');
-const saltRounds = 10;
+require('dotenv').config();
 
+const saltRounds = Number(process.env.SALT_ROUNDS);
 const hashAsync = util.promisify(bcrypt.hash);
 
 const createAccount = async (req, resp) => {
